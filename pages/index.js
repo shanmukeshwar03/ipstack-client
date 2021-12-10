@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Loading from "components/Loading";
 import axios from "axios";
-import Head from "next/head";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
