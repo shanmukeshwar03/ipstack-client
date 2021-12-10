@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Loading from "components/Loading";
+import Head from "next/head";
 import axios from "axios";
 
 const Home = () => {
@@ -28,6 +29,10 @@ const Home = () => {
 
   return (
     <div className="home-container">
+      <Head>
+        <title>Ipstack</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <header>Your IP Details</header>
       {error ? (
         <span className="home-error">{error}</span>
