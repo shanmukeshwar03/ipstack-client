@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 * {
   margin: 0;
@@ -7,10 +10,5 @@
 }
 
 body {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Inter", sans-serif;
 }

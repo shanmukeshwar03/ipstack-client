@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
-import Loading from "components/Loading";
 import Head from "next/head";
 import axios from "axios";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [ipstack, setIpstack] = useState(null);
 
   const getIpDetails = async () => {
-    setError(null);
     try {
+      setLoading(true);
       const response = await axios.get("/");
-      setIpstack(response.data);
+      if (response.data.status === "success") setIpstack(response.data);
+      else setIpstack(null);
     } catch (error) {
-      if (error.response.data) {
-        setError(error.response.data);
-      }
+      console.log(error);
     }
     setLoading(false);
   };
@@ -25,25 +22,46 @@ const Home = () => {
     getIpDetails();
   }, []);
 
-  if (loading) return <Loading />;
-
   return (
-    <div className="home-container">
+    <div className="flex flex-col mt-8 items-center m-auto w-full md:w-2/4 lg:w1/2">
       <Head>
-        <title>Ipstack</title>
+        <title>ipstack</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <header>Your IP Details</header>
-      {error ? (
-        <span className="home-error">{error}</span>
-      ) : (
-        Object.keys(ipstack).map((detail, key) => (
-          <div className="home-detail" key={key}>
-            <span>{detail} : </span>
-            <span>{ipstack[detail]}</span>
-          </div>
-        ))
-      )}
+      <div className="shadow-lg p-4 rounded-md w-3/4 lg:w-1/2">
+        {ipstack ? (
+          <>
+            <header className="mb-2 text-2xl font-medium text-indigo-700">
+              Your IP Details
+            </header>
+            {Object.keys(ipstack).map((detail, key) => (
+              <div className="flex gap-2 items-center" key={key}>
+                <span className="text-lg font-medium capitalize">
+                  {detail}:
+                </span>
+                <span className="text-md font-normal text-slate-700 capitalize">
+                  {ipstack[detail]}
+                </span>
+              </div>
+            ))}
+          </>
+        ) : (
+          <span className="text-center text-xl text-slate-700 font-medium">
+            Unable to get your ip-details
+          </span>
+        )}
+      </div>
+      <button
+        onClick={getIpDetails}
+        className="mt-6 bg-indigo-500 px-2 py-1 rounded-md text-white shadow-sm flex gap-2 items-center hover:bg-indigo-400 hover:scale-105 hover:rounded-xl"
+      >
+        <div
+          className={`${
+            !loading && "hidden"
+          } animate-spin h-5 w-5 border-[3px] border-t-white border-l-white rounded-[50%] border-b-transparent border-r-white`}
+        ></div>
+        check again
+      </button>
     </div>
   );
 };

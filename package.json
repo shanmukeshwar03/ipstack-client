@@ -12,13 +12,15 @@
   "author": "Shanmukeshwar03",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.24.0",
-    "next": "^12.0.7",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "axios": "^0.27.2",
+    "next": "^12.1.5",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.37",
-    "npm-check-updates": "^12.0.3"
+    "@types/react": "^18.0.8",
+    "autoprefixer": "^10.4.6",
+    "postcss": "^8.4.13",
+    "tailwindcss": "^3.0.24"
   }
 }
